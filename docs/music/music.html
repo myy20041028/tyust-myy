@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>My Music</title>
+
+<style>
+body {
+  margin:0;
+  display:flex;
+  height:100vh;
+  font-family:Arial;
+  background:#0f172a;
+  color:white;
+}
+
+/* 左侧 */
+.sidebar {
+  width:200px;
+  background:#020617;
+  padding:15px;
+}
+.logo {
+  color:#38bdf8;
+  font-size:20px;
+  margin-bottom:20px;
+}
+.menu div {
+  padding:10px;
+  border-radius:6px;
+  cursor:pointer;
+}
+.menu div:hover {
+  background:#1e293b;
+}
+
+/* 主体 */
+.main {
+  flex:1;
+  display:flex;
+  flex-direction:column;
+}
+
+/* 搜索栏 */
+.topbar {
+  padding:10px;
+  border-bottom:1px solid #1e293b;
+}
+.search {
+  width:300px;
+  padding:8px;
+  border:none;
+  border-radius:6px;
+  background:#1e293b;
+  color:white;
+}
+
+/* 列表 */
+.list {
+  flex:1;
+  overflow:auto;
+}
+
+.song {
+  display:flex;
+  justify-content:space-between;
+  padding:10px;
+  border-bottom:1px solid #1e293b;
+  cursor:pointer;
+}
+.song:hover { background:#1e293b; }
+.song.active { background:#334155; }
+
+/* 播放器 */
+.player {
+  height:90px;
+  border-top:1px solid #1e293b;
+  display:flex;
+  align-items:center;
+  padding:10px;
+  gap:20px;
+}
+
+.cover {
+  width:60px;
+  height:60px;
+  border-radius:6px;
+  background:#1e293b;
+  background-size:cover;
+}
+
+.controls button {
+  background:#38bdf8;
+  border:none;
+  padding:6px 10px;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+.progress {
+  flex:1;
+}
+.progress input {
+  width:100%;
+}
+</style>
+</head>
+
+<body>
+
+<div class="sidebar">
+  <div class="logo">🎵 My Music</div>
+  <div class="menu">
+    <div>推荐</div>
+    <div>歌单</div>
+    <div>排行榜</div>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="topbar">
+    <input id="search" class="search" placeholder="搜索歌曲...">
+  </div>
+
+  <div class="list" id="list"></div>
+
+  <div class="player">
+
+    <div class="cover" id="cover"></div>
+
+    <div style="width:180px">
+      <div id="title">未播放</div>
+      <div id="artist" style="font-size:12px;color:#94a3b8"></div>
+    </div>
+
+    <div class="controls">
+      <button id="prev">⏮</button>
+      <button id="play">▶</button>
+      <button id="pause">⏸</button>
+      <button id="next">⏭</button>
+    </div>
+
+    <div class="progress">
+      <input type="range" id="progress" value="0">
+      <div id="time" style="font-size:12px;color:#94a3b8"></div>
+    </div>
+
+    <audio id="audio"></audio>
+
+  </div>
+
+</div>
+
+<script src="music.js"></script>
+</body>
+</html>

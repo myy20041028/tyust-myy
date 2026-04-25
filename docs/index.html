@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>小马同学</title>
+  <style>
+    /* 只留基础样式，保持页面好看 */
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;   /* 🔥左对齐 */
+      background: #0f172a;
+      color: white;
+      font-family: Arial, sans-serif;
+      padding: 40px;
+    }
+    h1 {
+      width: 100%;
+      text-align: center;  /* 🔥核心：文字居中 */
+      margin: 0;
+      font-size: 28px;
+    }
+    .btn-group {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+      padding: 20px;
+      border: 1px solid rgba(255,255,255,0.2);  /* 🔥边框 */
+      border-radius: 12px;
+      background: rgba(255,255,255,0.05);       /* 半透明 */
+      backdrop-filter: blur(10px);              /* 毛玻璃效果 */
+      width: fit-content;   /* 🔥不会撑满屏幕 */
+    }
+
+    button {
+      width: 220px;             /* 统一宽度 */
+      padding: 15px 30px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      background: #38bdf8;
+      color: white;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background: #0284c7;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+
+<body>
+  <h1>你好，这是小马同学的网站 🚀</h1>
+
+  <div class="btn-group">
+    <button id="goCameraBtn">📷 摄像头</button>
+    <button id="goROSBtn">🤖 ROS</button>
+    <button id="goChatBtn">💬 聊天</button>
+    <button id="goMUSICBtn">🎵 音乐</button>
+  </div>
+
+  <!-- 引入外部JS -->
+  <script src="index.js"></script>
+</body>
+</html>

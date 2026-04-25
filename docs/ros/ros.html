@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>ROS 万能话题工具</title>
+<script src="https://cdn.jsdelivr.net/npm/roslib/build/roslib.min.js"></script>
+<style>
+    body {
+        background: #0f172a;
+        color: #e2e8f0;
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        margin: 0;
+    }
+    .card {
+        background: #1e293b;
+        padding: 16px;
+        border-radius: 10px;
+        margin: 12px 0;
+        border: 1px solid #334155;
+    }
+    button {
+        background: #2563eb;
+        color: white;
+        border: none;
+        padding: 7px 14px;
+        border-radius: 6px;
+        cursor: pointer;
+        margin: 0 6px;
+    }
+    button.danger { background: #dc2626; }
+    button.publishBtn { background: #0d9488; }
+    button.sendBtn { background: #0ea5e9; }
+    input, select, textarea {
+        background: #0f172a;
+        color: white;
+        border: 1px solid #475569;
+        border-radius: 6px;
+        padding: 7px;
+        margin: 6px;
+        width: 260px;
+    }
+    textarea {
+        width: 95%;
+        min-height: 90px;
+        resize: vertical;
+    }
+    pre {
+        background: #0f172a;
+        padding: 10px;
+        border-radius: 6px;
+        max-height: 320px;
+        overflow: auto;
+        color: #a5f3fc;
+        white-space: pre-wrap;
+    }
+    .title {
+        color: #60a5fa;
+        margin-top: 0;
+    }
+    .status {
+        color: #94a3b8;
+        margin-left: 10px;
+    }
+</style>
+</head>
+
+<body>
+<h2>🔌 ROS 万能话题工具（订阅+发布）</h2>
+
+<div class="card">
+    <button onclick="connectROS()">连接 ROS</button>
+    <button onclick="disconnectROS()">断开连接</button>
+    <button onclick="fetchTopics()">刷新话题列表</button>
+    <span class="status" id="status">未连接</span>
+</div>
+
+<div class="card">
+    <h3 class="title">📥 订阅话题</h3>
+    <div>话题名称：<input type="text" id="sub_topic" list="topic_list"></div>
+    <div>
+        消息类型：
+        <select id="sub_type">
+            <option value="std_msgs/String">std_msgs/String</option>
+            <option value="std_msgs/Int32">std_msgs/Int32</option>
+            <option value="std_msgs/Float64">std_msgs/Float64</option>
+            <option value="std_msgs/Bool">std_msgs/Bool</option>
+            <option value="geometry_msgs/Twist">geometry_msgs/Twist</option>
+            <option value="geometry_msgs/Pose">geometry_msgs/Pose</option>
+            <option value="nav_msgs/Odometry">nav_msgs/Odometry</option>
+            <option value="sensor_msgs/LaserScan">sensor_msgs/LaserScan</option>
+            <option value="sensor_msgs/Image">sensor_msgs/Image</option>
+            <option value="sensor_msgs/Range">sensor_msgs/Range</option>
+            <option value="custom">手动输入</option>
+        </select>
+        <input type="text" id="sub_type_custom" style="display:none; width:240px;">
+    </div>
+    <button onclick="addSubscribe()">开始订阅</button>
+</div>
+
+<div id="sub_container"></div>
+<hr style="border-color:#334155;margin:20px 0;">
+
+<div class="card">
+    <h3 class="title">📤 发布话题</h3>
+    <div>话题名称：<input type="text" id="pub_topic" list="topic_list"></div>
+    <div>
+        消息类型：
+        <select id="pub_type">
+            <option value="std_msgs/String">std_msgs/String</option>
+            <option value="std_msgs/Int32">std_msgs/Int32</option>
+            <option value="std_msgs/Float64">std_msgs/Float64</option>
+            <option value="std_msgs/Bool">std_msgs/Bool</option>
+            <option value="geometry_msgs/Twist">geometry_msgs/Twist</option>
+            <option value="geometry_msgs/Pose">geometry_msgs/Pose</option>
+            <option value="nav_msgs/Odometry">nav_msgs/Odometry</option>
+            <option value="sensor_msgs/LaserScan">sensor_msgs/LaserScan</option>
+            <option value="sensor_msgs/Range">sensor_msgs/Range</option>
+            <option value="custom">手动输入</option>
+        </select>
+        <input type="text" id="pub_type_custom" style="display:none; width:240px;">
+    </div>
+    <button class="publishBtn" onclick="addPublish()">添加发布器</button>
+</div>
+
+<div id="pub_container"></div>
+<datalist id="topic_list"></datalist>
+
+<script src="ros.js"></script>
+</body>
+</html>
