@@ -3,7 +3,7 @@ let songs = [];
 let currentIndex = -1;
 
 // 👇 本地用这个
-const BASE_URL = "https";
+const BASE_URL = "https://loachost:3000";
 
 window.onload = () => {
   audio = document.getElementById("audio");
