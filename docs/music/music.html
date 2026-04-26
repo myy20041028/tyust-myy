@@ -2,105 +2,151 @@
 <html lang="zh">
 <head>
 <meta charset="UTF-8">
-<title>My Music</title>
+<title>My Music Player</title>
 
 <style>
-body {
+body{
   margin:0;
+  font-family:Arial;
+  background:#0b1220;
+  color:white;
   display:flex;
   height:100vh;
-  font-family:Arial;
-  background:#0f172a;
-  color:white;
+  overflow:hidden;
 }
 
 /* 左侧 */
-.sidebar {
-  width:200px;
-  background:#020617;
+.sidebar{
+  width:220px;
+  background:#050814;
   padding:15px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
 }
-.logo {
-  color:#38bdf8;
+
+.logo{
   font-size:20px;
-  margin-bottom:20px;
+  color:#38bdf8;
+  font-weight:bold;
+  margin-bottom:10px;
 }
-.menu div {
+
+.menu div{
   padding:10px;
-  border-radius:6px;
+  border-radius:8px;
   cursor:pointer;
 }
-.menu div:hover {
+
+.menu div:hover{
   background:#1e293b;
 }
 
 /* 主体 */
-.main {
+.main{
   flex:1;
   display:flex;
   flex-direction:column;
 }
 
 /* 搜索栏 */
-.topbar {
+.topbar{
   padding:10px;
-  border-bottom:1px solid #1e293b;
+  display:flex;
+  gap:10px;
 }
-.search {
-  width:300px;
-  padding:8px;
+
+.search-box{
+  display:flex;
+  flex:1;
+}
+
+.search-box input{
+  flex:1;
+  padding:10px;
   border:none;
-  border-radius:6px;
+  border-radius:8px 0 0 8px;
   background:#1e293b;
   color:white;
 }
 
-/* 列表 */
-.list {
-  flex:1;
-  overflow:auto;
-}
-
-.song {
-  display:flex;
-  justify-content:space-between;
-  padding:10px;
-  border-bottom:1px solid #1e293b;
+.search-box button{
+  padding:10px 15px;
+  border:none;
+  border-radius:0 8px 8px 0;
+  background:#38bdf8;
   cursor:pointer;
 }
-.song:hover { background:#1e293b; }
-.song.active { background:#334155; }
 
-/* 播放器 */
-.player {
+/* 歌曲列表 */
+.list{
+  flex:1;
+  overflow:auto;
+  padding:10px;
+}
+
+.song{
+  display:flex;
+  justify-content:space-between;
+  padding:12px;
+  margin-bottom:6px;
+  background:#0f172a;
+  border-radius:8px;
+  cursor:pointer;
+  transition:0.2s;
+}
+
+.song:hover{
+  background:#1e293b;
+  transform:scale(1.01);
+}
+
+.song.active{
+  background:#334155;
+}
+
+/* 底部播放器 */
+.player{
   height:90px;
+  background:#050814;
   border-top:1px solid #1e293b;
   display:flex;
   align-items:center;
   padding:10px;
-  gap:20px;
+  gap:15px;
+
+  position:fixed;
+  bottom:0;
+  left:220px;
+  right:0;
 }
 
-.cover {
+.cover{
   width:60px;
   height:60px;
-  border-radius:6px;
+  border-radius:8px;
   background:#1e293b;
   background-size:cover;
 }
 
-.controls button {
+.info{
+  width:180px;
+}
+
+.controls button{
   background:#38bdf8;
   border:none;
   padding:6px 10px;
   border-radius:6px;
   cursor:pointer;
+  margin-right:5px;
 }
 
-.progress {
+.progress{
   flex:1;
 }
-.progress input {
+
+.progress input{
   width:100%;
 }
 </style>
@@ -108,6 +154,7 @@ body {
 
 <body>
 
+<!-- 左侧 -->
 <div class="sidebar">
   <div class="logo">🎵 My Music</div>
   <div class="menu">
@@ -117,38 +164,45 @@ body {
   </div>
 </div>
 
+<!-- 主体 -->
 <div class="main">
 
+  <!-- 搜索 -->
   <div class="topbar">
-    <input id="search" class="search" placeholder="搜索歌曲...">
+    <div class="search-box">
+      <input id="search" placeholder="搜索歌曲...">
+      <button id="searchBtn">🔍</button>
+    </div>
   </div>
 
+  <!-- 列表 -->
   <div class="list" id="list"></div>
 
-  <div class="player">
+</div>
 
-    <div class="cover" id="cover"></div>
+<!-- 播放器 -->
+<div class="player">
 
-    <div style="width:180px">
-      <div id="title">未播放</div>
-      <div id="artist" style="font-size:12px;color:#94a3b8"></div>
-    </div>
+  <div class="cover" id="cover"></div>
 
-    <div class="controls">
-      <button id="prev">⏮</button>
-      <button id="play">▶</button>
-      <button id="pause">⏸</button>
-      <button id="next">⏭</button>
-    </div>
-
-    <div class="progress">
-      <input type="range" id="progress" value="0">
-      <div id="time" style="font-size:12px;color:#94a3b8"></div>
-    </div>
-
-    <audio id="audio"></audio>
-
+  <div class="info">
+    <div id="title">未播放</div>
+    <div id="artist" style="font-size:12px;color:#94a3b8"></div>
   </div>
+
+  <div class="controls">
+    <button id="prev">⏮</button>
+    <button id="play">▶</button>
+    <button id="pause">⏸</button>
+    <button id="next">⏭</button>
+  </div>
+
+  <div class="progress">
+    <input type="range" id="progress" value="0">
+    <div id="time" style="font-size:12px;color:#94a3b8"></div>
+  </div>
+
+  <audio id="audio"></audio>
 
 </div>
 
