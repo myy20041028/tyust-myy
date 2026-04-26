@@ -3,7 +3,7 @@ let songs = [];
 let currentIndex = -1;
 
 // 👇 本地用这个
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = "http://47.102.157.76:3000";
 
 window.onload = () => {
   audio = document.getElementById("audio");
