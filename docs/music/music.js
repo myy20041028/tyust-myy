@@ -3,7 +3,7 @@ let songs = [];
 let currentIndex = -1;
 
 // 👇 本地用这个
-const BASE_URL = "https://myy666.asia";
+const BASE_URL = "https";
 
 window.onload = () => {
   audio = document.getElementById("audio");
